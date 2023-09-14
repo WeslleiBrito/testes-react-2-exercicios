@@ -59,4 +59,19 @@ describe("Testando o modal", () => {
 
         screen.logTestingPlaygroundURL()
     })
+
+    test("Deve disparar a função de closeModal", async () => {
+
+        const user = userEvent.setup()
+
+        render(
+            <Modal activeModal={activeModalMock} closeModal={closeModalMock}/>
+        )
+
+        const buttonClose = screen.getByRole('button', {name: /❌/i})
+
+        await user.click(buttonClose)
+
+        expect(closeModalMock).toHaveBeenCalled()
+    })
 })
